@@ -1,3 +1,20 @@
+#!/bin/bash
+
+# ============================================
+# Full miRNA and Clinical Data Analysis Script
+# ============================================
+
+# NOTE:
+# Before running this script, make sure to:
+# 1. Complete the Snakemake pipeline for raw miRNA processing
+# 2. Preprocess clinical data using:
+#    python3 ./clinical_analysis/clinical_main.py  \
+#      --path1 "./data/clinical/AAR_control_cases_anon.sav" \
+#      --path2 "./data/clinical/AAR_kontroles.sav" \
+#      --output_dir "./reports/" \
+#      --data_save_path "./data/clinical/"
+
+
 # ================
 # Step 1: Preprocess miRNA counts
 # ================
