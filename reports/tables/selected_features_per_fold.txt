@@ -1,0 +1,8 @@
+Fold 1:  hsa-miR-625-3p, hsa-miR-625-5p, hsa-miR-10b-5p, hsa-miR-423-5p, hsa-miR-10a-5p, hsa-miR-3613-5p 
+Fold 2:  hsa-miR-17-3p, hsa-miR-625-3p, hsa-miR-30e-5p, hsa-miR-142-5p, hsa-miR-23b-3p, hsa-miR-320b, hsa-miR-6803-3p, hsa-miR-16-2-3p, hsa-miR-324-5p 
+Fold 3:  hsa-miR-1303, hsa-miR-376a-3p, hsa-miR-497-5p, hsa-miR-625-5p, hsa-miR-182-5p, hsa-miR-16-2-3p, hsa-miR-625-3p, hsa-miR-18b-5p 
+Fold 4:  hsa-miR-142-5p, hsa-miR-423-5p, hsa-miR-486-3p, hsa-miR-625-3p, hsa-miR-183-3p, hsa-miR-625-5p, hsa-miR-23b-3p, hsa-miR-320a-3p 
+Fold 5:  hsa-miR-625-5p, hsa-miR-11400, hsa-miR-17-3p, hsa-miR-423-5p, hsa-miR-6803-3p, hsa-miR-1287-5p, hsa-miR-23b-3p, hsa-miR-126-3p 
+
+Final combined features:
+hsa-miR-625-3p, hsa-miR-625-5p, hsa-miR-10b-5p, hsa-miR-423-5p, hsa-miR-10a-5p, hsa-miR-3613-5p, hsa-miR-17-3p, hsa-miR-30e-5p, hsa-miR-142-5p, hsa-miR-23b-3p, hsa-miR-320b, hsa-miR-6803-3p, hsa-miR-16-2-3p, hsa-miR-324-5p, hsa-miR-1303, hsa-miR-376a-3p, hsa-miR-497-5p, hsa-miR-182-5p, hsa-miR-18b-5p, hsa-miR-486-3p, hsa-miR-183-3p, hsa-miR-320a-3p, hsa-miR-11400, hsa-miR-1287-5p, hsa-miR-126-3p 

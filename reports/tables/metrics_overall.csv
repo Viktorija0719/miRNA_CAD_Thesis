@@ -1,0 +1,8 @@
+"","x"
+"Accuracy",0.7935
+"Kappa",0.6081
+"AccuracyLower",0.6014
+"AccuracyUpper",0.9179
+"AccuracyNull",0.5845
+"AccuracyPValue",0.0965
+"McnemarPValue",NA
