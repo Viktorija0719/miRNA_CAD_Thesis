@@ -28,7 +28,7 @@ def main():
     allFiles = glob.glob(os.path.join(miRNA_dir, 'miRNAs_expressed_all_samples_*.csv'))
 
     if not allFiles:
-        print(f"⚠️  No input files found in '{miRNA_dir}'")
+        print(f"️  No input files found in '{miRNA_dir}'")
         sys.exit(1)
 
     counts_map = {}

@@ -165,5 +165,5 @@ write.csv(merged_coefs, file.path(output_dir, "merged_miRNA_coefficients.csv"), 
 write.csv(round(by_class_matrix, 4), file.path(output_dir, "metrics_by_class.csv"))
 write.csv(round(mean_overall, 4), file.path(output_dir, "metrics_overall.csv"))
 
-cat("\n✅ Files saved to:", output_dir, "\n")
+cat("\n Files saved to:", output_dir, "\n")
 

@@ -85,7 +85,7 @@ for (comp in comparisons) {
 
   out_path <- file.path(output_dir, paste0("limma_DEGs_", comp, ".csv"))
   write.table(res, out_path, sep = ",", quote = FALSE, row.names = FALSE)
-  message("✅ Saved: ", out_path)
+  message(" Saved: ", out_path)
   }
 }
 

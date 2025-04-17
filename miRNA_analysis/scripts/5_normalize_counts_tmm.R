@@ -12,7 +12,7 @@
 main <- function(argv = commandArgs(trailingOnly = TRUE)) {
 
   if (length(argv) != 2) {
-    stop("❌ Usage: Rscript normalize_tmm_log2cpm.R <input_file> <output_file>")
+    stop(" Usage: Rscript normalize_tmm_log2cpm.R <input_file> <output_file>")
   }
 
   input_path <- argv[1]

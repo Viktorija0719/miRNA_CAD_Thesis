@@ -39,7 +39,7 @@ main <- function(argv = commandArgs(trailingOnly = TRUE)) {
   adjusted_df <- data.frame(miRNA = rownames(adjusted_counts), adjusted_counts, check.names = FALSE)
   write.table(adjusted_df, output_path, sep = "\t", quote = FALSE, row.names = FALSE)
 
-  message("✅ ComBat-seq correction complete. Output saved to: ", output_path)
+  message(" ComBat-seq correction complete. Output saved to: ", output_path)
 }
 
 main()
