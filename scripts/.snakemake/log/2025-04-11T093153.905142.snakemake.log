@@ -1,0 +1,96 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+all                        1
+mirdeep2_mapper            1
+multiqc                    1
+prepare_mirdeep_ref        1
+process_miRNA_files        1
+run_miRDeep2               1
+total                      6
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Fri Apr 11 09:31:59 2025]
+localrule multiqc:
+    input: results/fastqc/miRNA_S10467Nr27.1_fastqc.zip
+    output: results/multiqc/multiqc_report.html
+    jobid: 1
+    reason: Missing output files: results/multiqc/multiqc_report.html
+    resources: tmpdir=/tmp
+
+
+[Fri Apr 11 09:32:09 2025]
+localrule prepare_mirdeep_ref:
+    input: ../data/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+    output: ref/mirdeep2/hsa.fa, ref/mirdeep2/hsa_v2.1.ebwt, ref/mirdeep2/hsa_v2.ready
+    jobid: 3
+    reason: Missing output files: ref/mirdeep2/hsa_v2.1.ebwt, ref/mirdeep2/hsa.fa, ref/mirdeep2/hsa_v2.ready
+    resources: tmpdir=/tmp
+
+[Fri Apr 11 09:32:28 2025]
+Finished job 1.
+1 of 6 steps (17%) done
+Touching output file ref/mirdeep2/hsa_v2.1.ebwt.
+Touching output file ref/mirdeep2/hsa_v2.ready.
+[Fri Apr 11 14:20:01 2025]
+Finished job 3.
+2 of 6 steps (33%) done
+Select jobs to execute...
+Execute 2 jobs...
+
+[Fri Apr 11 14:20:03 2025]
+localrule process_miRNA_files:
+    input: ../data/ref/hairpin.fa, ../data/ref/mature.fa, ref/mirdeep2/hsa.fa
+    output: ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa, ref/mirdeep2/hsa2.fa
+    jobid: 5
+    reason: Missing output files: ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa, ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/hsa2.fa; Input files updated by another job: ref/mirdeep2/hsa.fa
+    resources: tmpdir=/tmp
+
+
+[Fri Apr 11 14:20:03 2025]
+localrule mirdeep2_mapper:
+    input: ../data/raw/miRNA_S10467Nr27.1.fastq.gz, ref/mirdeep2/hsa_v2.ready
+    output: results/mirdeep2/miRNA_S10467Nr27.1_mapped.fa, results/mirdeep2/miRNA_S10467Nr27.1_mapped_vs_hsa.arf
+    jobid: 4
+    reason: Missing output files: results/mirdeep2/miRNA_S10467Nr27.1_mapped_vs_hsa.arf, results/mirdeep2/miRNA_S10467Nr27.1_mapped.fa; Input files updated by another job: ref/mirdeep2/hsa_v2.ready
+    resources: tmpdir=/tmp
+
+[Fri Apr 11 14:20:03 2025]
+Error in rule process_miRNA_files:
+    jobid: 5
+    input: ../data/ref/hairpin.fa, ../data/ref/mature.fa, ref/mirdeep2/hsa.fa
+    output: ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa, ref/mirdeep2/hsa2.fa
+    shell:
+        
+        cp ../data/ref/hairpin.fa ../data/ref/mature.fa ref/mirdeep2/
+
+        # Navigate to target directory
+        cd ref/mirdeep2
+
+        # Clean up files with Perl for renaming
+        perl -plane 's/\s+.+$//' < ../data/ref/hairpin.fa > miRBase_hairpin_hsa_v22_2.fa
+        perl -plane 's/\s+.+$//' < ../data/ref/mature.fa > miRBase_mature_hsa_v22_2.fa
+
+        # Clean hsa.fa to create hsa2.fa
+        perl -plane 's/\s+.+$//' < ref/mirdeep2/hsa.fa > hsa2.fa
+
+        # Extract miRNAs and clean further
+        extract_miRNAs.pl miRBase_mature_hsa_v22_2.fa hsa > miRBase_mature_hsa_v22_3.fa
+        extract_miRNAs.pl miRBase_hairpin_hsa_v22_2.fa hsa > miRBase_hairpin_hsa_v22_3.fa
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+[Fri Apr 11 14:52:15 2025]
+Finished job 4.
+3 of 6 steps (50%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-04-11T093153.905142.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

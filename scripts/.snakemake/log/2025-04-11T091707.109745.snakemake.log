@@ -1,0 +1,60 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+all                        1
+fastqc                     1
+mirdeep2_mapper            1
+multiqc                    1
+prepare_mirdeep_ref        1
+process_miRNA_files        1
+run_miRDeep2               1
+total                      7
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Fri Apr 11 09:17:09 2025]
+localrule fastqc:
+    input: ../data/raw/miRNA_S10467Nr27.1.fastq.gz
+    output: results/fastqc/miRNA_S10467Nr27.1_fastqc.html, results/fastqc/miRNA_S10467Nr27.1_fastqc.zip
+    jobid: 2
+    reason: Missing output files: results/fastqc/miRNA_S10467Nr27.1_fastqc.zip
+    resources: tmpdir=/tmp
+
+
+[Fri Apr 11 09:17:20 2025]
+localrule prepare_mirdeep_ref:
+    input: ../data/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+    output: ref/mirdeep2/hsa.fa, ref/mirdeep2/hsa_v2.1.ebwt, ref/mirdeep2/hsa_v2.ready
+    jobid: 3
+    reason: Missing output files: ref/mirdeep2/hsa.fa, ref/mirdeep2/hsa_v2.1.ebwt, ref/mirdeep2/hsa_v2.ready
+    resources: tmpdir=/tmp
+
+[Fri Apr 11 09:17:30 2025]
+Error in rule prepare_mirdeep_ref:
+    jobid: 3
+    input: ../data/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+    output: ref/mirdeep2/hsa.fa, ref/mirdeep2/hsa_v2.1.ebwt, ref/mirdeep2/hsa_v2.ready
+    shell:
+        
+        cp ../data/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa ref/mirdeep2/hsa.fa
+        cd ref/mirdeep2
+        bowtie-build ref/mirdeep2/hsa.fa hsa_v2
+        touch ref/mirdeep2/hsa_v2.ready
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job prepare_mirdeep_ref since they might be corrupted:
+ref/mirdeep2/hsa.fa
+[Fri Apr 11 09:18:26 2025]
+Finished job 2.
+1 of 7 steps (14%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-04-11T091707.109745.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

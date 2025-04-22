@@ -1,0 +1,66 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job             count
+------------  -------
+all                 1
+run_miRDeep2        1
+total               2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Apr 11 18:34:27 2025]
+localrule run_miRDeep2:
+    input: results/mirdeep2/miRNA_S10467Nr27.1_mapped.fa, results/mirdeep2/miRNA_S10467Nr27.1_mapped_vs_hsa.arf, ref/mirdeep2/hsa2.fa, ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa
+    output: results/mirdeep2/result_miRNA_S10467Nr27.1.html, results/mirdeep2/result_miRNA_S10467Nr27.1.csv, results/mirdeep2/survey_miRNA_S10467Nr27.1.csv, results/mirdeep2/output_miRNA_S10467Nr27.1.mrd, results/mirdeep2/expression_miRNA_S10467Nr27.1.html, results/mirdeep2/error_miRNA_S10467Nr27.1.log, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, results/mirdeep2/result_miRNA_S10467Nr27.1.bed, results/mirdeep2/pdfs_miRNA_S10467Nr27.1, results/mirdeep2/mirna_results_miRNA_S10467Nr27.1, results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt
+    jobid: 6
+    reason: Missing output files: results/mirdeep2/expression_miRNA_S10467Nr27.1.html, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, results/mirdeep2/result_miRNA_S10467Nr27.1.html, results/mirdeep2/mirna_results_miRNA_S10467Nr27.1, results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt, results/mirdeep2/survey_miRNA_S10467Nr27.1.csv, results/mirdeep2/error_miRNA_S10467Nr27.1.log, results/mirdeep2/pdfs_miRNA_S10467Nr27.1, results/mirdeep2/output_miRNA_S10467Nr27.1.mrd, results/mirdeep2/result_miRNA_S10467Nr27.1.csv, results/mirdeep2/result_miRNA_S10467Nr27.1.bed
+    resources: tmpdir=/tmp
+
+[Fri Apr 11 18:40:17 2025]
+Error in rule run_miRDeep2:
+    jobid: 6
+    input: results/mirdeep2/miRNA_S10467Nr27.1_mapped.fa, results/mirdeep2/miRNA_S10467Nr27.1_mapped_vs_hsa.arf, ref/mirdeep2/hsa2.fa, ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa
+    output: results/mirdeep2/result_miRNA_S10467Nr27.1.html, results/mirdeep2/result_miRNA_S10467Nr27.1.csv, results/mirdeep2/survey_miRNA_S10467Nr27.1.csv, results/mirdeep2/output_miRNA_S10467Nr27.1.mrd, results/mirdeep2/expression_miRNA_S10467Nr27.1.html, results/mirdeep2/error_miRNA_S10467Nr27.1.log, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, results/mirdeep2/result_miRNA_S10467Nr27.1.bed, results/mirdeep2/pdfs_miRNA_S10467Nr27.1, results/mirdeep2/mirna_results_miRNA_S10467Nr27.1, results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt
+    shell:
+        
+        for f in results/mirdeep2/miRNA_S10467Nr27.1_mapped.fa; do
+            bname=$(basename ${f} '_mapped.fa')
+
+            miRDeep2.pl ${f} ref/mirdeep2/hsa2.fa results/mirdeep2/${bname}_mapped_vs_hsa.arf \
+                ref/mirdeep2/miRBase_mature_hsa_v22_3.fa none ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa -t Human -P -v -z $bname \
+                2> results/mirdeep2/${bname}_miRDeep2_log.txt
+
+            # Get latest timestamp prefix
+            timestamp=$(ls -td result_*${bname}.html | head -n1 | sed 's/result_\(.*\)'${bname}'.html/\1/')
+
+            # Move & rename outputs to expected names
+            mv result_${timestamp}${bname}.html results/mirdeep2/result_${bname}.html
+            mv result_${timestamp}${bname}.csv results/mirdeep2/result_${bname}.csv
+            mv survey.csv results/mirdeep2/survey_${bname}.csv
+            mv output.mrd results/mirdeep2/output_${bname}.mrd
+            mv expression_${timestamp}${bname}.html results/mirdeep2/expression_${bname}.html
+            mv error_${timestamp}${bname}.log results/mirdeep2/error_${bname}.log
+            mv miRNAs_expressed_all_samples_${timestamp}${bname}.csv results/mirdeep2/miRNAs_expressed_all_samples_${bname}.csv
+            mv result_${timestamp}${bname}.bed results/mirdeep2/result_${bname}.bed
+            mv pdfs_${timestamp}${bname} results/mirdeep2/pdfs_${bname}
+            mv mirna_results_${timestamp}${bname} results/mirdeep2/mirna_results_${bname}
+
+            # Also move supporting folders if needed
+            mv expression_analyses results/mirdeep2/expression_analyses_${bname} || true
+            mv mirdeep_runs results/mirdeep2/mirdeep_runs_${bname} || true
+            mv dir_prepare_signature* results/mirdeep2/prep_signatures_${bname} || true
+        done
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job run_miRDeep2 since they might be corrupted:
+results/mirdeep2/result_miRNA_S10467Nr27.1.html, results/mirdeep2/result_miRNA_S10467Nr27.1.csv, results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-04-11T183418.911529.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

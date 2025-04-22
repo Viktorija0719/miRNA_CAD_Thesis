@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule mirdeep2_mapper in file /mnt/beegfs2/home/vikja01/miRNA_CAD_Thesis/miRNA_analysis/Snakefile02, line 106:
+Missing input files for rule mirdeep2_mapper:
+    output: results/mirdeep2/miRNA_S7504Nr14.1_mapped.fa, results/mirdeep2/miRNA_S7504Nr14.1_mapped_vs_hsa.arf
+    affected files:
+        ../data/raw/miRNA_S7504Nr14.1.fastq.gz

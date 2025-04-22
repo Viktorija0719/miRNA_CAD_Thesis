@@ -1,0 +1,67 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job                          count
+-------------------------  -------
+all                              1
+fastqc                           1
+mirdeep2_mapper                  1
+multiqc                          1
+organize_mirdeep2_outputs        1
+run_miRDeep2                     1
+total                            6
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Mon Apr 14 17:33:14 2025]
+localrule mirdeep2_mapper:
+    input: ../data/raw/miRNA_S7504Nr14.1.fastq.gz, ref/mirdeep2/hsa_v2.ready
+    output: results/mirdeep2/miRNA_S7504Nr14.1_mapped.fa, results/mirdeep2/miRNA_S7504Nr14.1_mapped_vs_hsa.arf
+    jobid: 4
+    reason: Missing output files: results/mirdeep2/miRNA_S7504Nr14.1_mapped.fa, results/mirdeep2/miRNA_S7504Nr14.1_mapped_vs_hsa.arf
+    resources: tmpdir=/tmp
+
+
+[Mon Apr 14 17:33:38 2025]
+localrule fastqc:
+    input: ../data/raw/miRNA_S7504Nr14.1.fastq.gz
+    output: results/fastqc/miRNA_S7504Nr14.1_fastqc.html, results/fastqc/miRNA_S7504Nr14.1_fastqc.zip
+    jobid: 2
+    reason: Missing output files: results/fastqc/miRNA_S7504Nr14.1_fastqc.zip; Updated input files: ../data/raw/miRNA_S7504Nr14.1.fastq.gz
+    resources: tmpdir=/tmp
+
+[Mon Apr 14 17:35:59 2025]
+Finished job 2.
+1 of 6 steps (17%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Apr 14 17:35:59 2025]
+localrule multiqc:
+    input: results/fastqc/miRNA_S7504Nr14.1_fastqc.zip
+    output: results/multiqc/multiqc_report.html
+    jobid: 1
+    reason: Input files updated by another job: results/fastqc/miRNA_S7504Nr14.1_fastqc.zip
+    resources: tmpdir=/tmp
+
+[Mon Apr 14 17:36:17 2025]
+Finished job 1.
+2 of 6 steps (33%) done
+[Mon Apr 14 17:57:59 2025]
+Finished job 4.
+3 of 6 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Apr 14 17:57:59 2025]
+localrule run_miRDeep2:
+    input: results/mirdeep2/miRNA_S7504Nr14.1_mapped.fa, results/mirdeep2/miRNA_S7504Nr14.1_mapped_vs_hsa.arf, ref/mirdeep2/hsa2.fa, ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa
+    output: results/mirdeep2/result_miRNA_S7504Nr14.1.html, results/mirdeep2/result_miRNA_S7504Nr14.1.csv, results/mirdeep2/survey_miRNA_S7504Nr14.1.csv, results/mirdeep2/output_miRNA_S7504Nr14.1.mrd, results/mirdeep2/expression_miRNA_S7504Nr14.1.html, results/mirdeep2/error_miRNA_S7504Nr14.1.log, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S7504Nr14.1.csv, results/mirdeep2/result_miRNA_S7504Nr14.1.bed, results/mirdeep2/pdfs_miRNA_S7504Nr14.1, results/mirdeep2/mirna_results_miRNA_S7504Nr14.1, results/mirdeep2/miRNA_S7504Nr14.1_miRDeep2_log.txt
+    jobid: 6
+    reason: Missing output files: results/mirdeep2/survey_miRNA_S7504Nr14.1.csv, results/mirdeep2/result_miRNA_S7504Nr14.1.html, results/mirdeep2/output_miRNA_S7504Nr14.1.mrd, results/mirdeep2/mirna_results_miRNA_S7504Nr14.1, results/mirdeep2/pdfs_miRNA_S7504Nr14.1, results/mirdeep2/result_miRNA_S7504Nr14.1.bed, results/mirdeep2/expression_miRNA_S7504Nr14.1.html, results/mirdeep2/result_miRNA_S7504Nr14.1.csv, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S7504Nr14.1.csv, results/mirdeep2/error_miRNA_S7504Nr14.1.log, results/mirdeep2/miRNA_S7504Nr14.1_miRDeep2_log.txt; Input files updated by another job: results/mirdeep2/miRNA_S7504Nr14.1_mapped_vs_hsa.arf, results/mirdeep2/miRNA_S7504Nr14.1_mapped.fa
+    resources: tmpdir=/tmp
+
+Will exit after finishing currently running jobs (scheduler).

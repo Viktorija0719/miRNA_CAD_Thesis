@@ -1,0 +1,42 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+all                        1
+process_miRNA_files        1
+run_miRDeep2               1
+total                      3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Apr 11 16:38:24 2025]
+localrule process_miRNA_files:
+    input: ../data/ref/hairpin.fa, ../data/ref/mature.fa, ref/mirdeep2/hsa.fa
+    output: ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa, ref/mirdeep2/hsa2.fa
+    jobid: 5
+    reason: Missing output files: ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa, ref/mirdeep2/hsa2.fa, ref/mirdeep2/miRBase_mature_hsa_v22_3.fa
+    resources: tmpdir=/tmp
+
+RuleException in rule process_miRNA_files in file /mnt/beegfs2/home/vikja01/miRNA_CAD_Thesis/miRNA_analysis/Snakefile02, line 76:
+ValueError: Single '}' encountered in format string, when formatting the following:
+
+        cp {input.hairpin_fa} {input.mature_fa} {config[directories][mirdeep2_ref]}/
+
+        # Navigate to target directory
+        cd {config[directories][mirdeep2_ref]}
+
+        # Clean up files with Perl for renaming
+        perl -plane 's/\s+.+$//' < hairpin.fa > miRBase_hairpin_hsa_v22_2.fa
+        perl -plane 's/\s+.+$//' < mature.fa > miRBase_mature_hsa_v22_2.fa
+
+        # Clean hsa.fa to create hsa2.fa
+        perl -plane 's/\s+.+$//' < hsa.fa} > hsa2.fa
+
+        # Extract miRNAs and clean further
+        extract_miRNAs.pl miRBase_mature_hsa_v22_2.fa hsa > miRBase_mature_hsa_v22_3.fa
+        extract_miRNAs.pl miRBase_hairpin_hsa_v22_2.fa hsa > miRBase_hairpin_hsa_v22_3.fa
+        

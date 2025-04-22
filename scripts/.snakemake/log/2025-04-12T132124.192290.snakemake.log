@@ -1,0 +1,53 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count
+---------------------  -------
+all                          1
+move_mirdeep2_outputs        1
+run_miRDeep2                 1
+total                        3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Apr 12 13:21:25 2025]
+localrule run_miRDeep2:
+    input: results/mirdeep2/miRNA_S10467Nr27.1_mapped.fa, results/mirdeep2/miRNA_S10467Nr27.1_mapped_vs_hsa.arf, ref/mirdeep2/hsa2.fa, ref/mirdeep2/miRBase_mature_hsa_v22_3.fa, ref/mirdeep2/miRBase_hairpin_hsa_v22_3.fa
+    output: results/mirdeep2/run_miRDeep2.done
+    jobid: 7
+    reason: Missing output files: results/mirdeep2/run_miRDeep2.done
+    resources: tmpdir=/tmp
+
+Touching output file results/mirdeep2/run_miRDeep2.done.
+[Sat Apr 12 13:28:48 2025]
+Finished job 7.
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Apr 12 13:28:48 2025]
+localrule move_mirdeep2_outputs:
+    input: results/mirdeep2/run_miRDeep2.done
+    output: results/mirdeep2/result_miRNA_S10467Nr27.1.html, results/mirdeep2/result_miRNA_S10467Nr27.1.csv, results/mirdeep2/survey_miRNA_S10467Nr27.1.csv, results/mirdeep2/output_miRNA_S10467Nr27.1.mrd, results/mirdeep2/expression_miRNA_S10467Nr27.1.html, results/mirdeep2/error_miRNA_S10467Nr27.1.log, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, results/mirdeep2/result_miRNA_S10467Nr27.1.bed, results/mirdeep2/pdfs_miRNA_S10467Nr27.1, results/mirdeep2/mirna_results_miRNA_S10467Nr27.1, results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt
+    jobid: 6
+    reason: Missing output files: results/mirdeep2/result_miRNA_S10467Nr27.1.bed, results/mirdeep2/survey_miRNA_S10467Nr27.1.csv, results/mirdeep2/expression_miRNA_S10467Nr27.1.html, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, results/mirdeep2/result_miRNA_S10467Nr27.1.csv, results/mirdeep2/output_miRNA_S10467Nr27.1.mrd, results/mirdeep2/mirna_results_miRNA_S10467Nr27.1, results/mirdeep2/error_miRNA_S10467Nr27.1.log, results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt, results/mirdeep2/pdfs_miRNA_S10467Nr27.1, results/mirdeep2/result_miRNA_S10467Nr27.1.html; Input files updated by another job: results/mirdeep2/run_miRDeep2.done
+    resources: tmpdir=/tmp
+
+Warning: the following output files of rule move_mirdeep2_outputs were not present when the DAG was created:
+{'results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt'}
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule move_mirdeep2_outputs in file /mnt/beegfs2/home/vikja01/miRNA_CAD_Thesis/miRNA_analysis/Snakefile02, line 163:
+Job 6  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/mirdeep2/pdfs_miRNA_S10467Nr27.1 (missing locally, parent dir contents: survey_miRNA_S10467Nr27.1.csv, output_miRNA_S10467Nr27.1.mrd, result_miRNA_S10467Nr27.1.bed, result_miRNA_S10467Nr27.1.csv, error_miRNA_S10467Nr27.1.log, miRNA_S10467Nr27.1_mapped.fa, miRNA_S10467Nr27.1_mapped_vs_hsa.arf, expression_miRNA_S10467Nr27.1.html, miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, run_miRDeep2.done, result_miRNA_S10467Nr27.1.html)
+results/mirdeep2/mirna_results_miRNA_S10467Nr27.1 (missing locally, parent dir contents: survey_miRNA_S10467Nr27.1.csv, output_miRNA_S10467Nr27.1.mrd, result_miRNA_S10467Nr27.1.bed, result_miRNA_S10467Nr27.1.csv, error_miRNA_S10467Nr27.1.log, miRNA_S10467Nr27.1_mapped.fa, miRNA_S10467Nr27.1_mapped_vs_hsa.arf, expression_miRNA_S10467Nr27.1.html, miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, run_miRDeep2.done, result_miRNA_S10467Nr27.1.html)
+results/mirdeep2/miRNA_S10467Nr27.1_miRDeep2_log.txt (missing locally, parent dir contents: survey_miRNA_S10467Nr27.1.csv, output_miRNA_S10467Nr27.1.mrd, result_miRNA_S10467Nr27.1.bed, result_miRNA_S10467Nr27.1.csv, error_miRNA_S10467Nr27.1.log, miRNA_S10467Nr27.1_mapped.fa, miRNA_S10467Nr27.1_mapped_vs_hsa.arf, expression_miRNA_S10467Nr27.1.html, miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, run_miRDeep2.done, result_miRNA_S10467Nr27.1.html)
+Removing output files of failed job move_mirdeep2_outputs since they might be corrupted:
+results/mirdeep2/result_miRNA_S10467Nr27.1.html, results/mirdeep2/result_miRNA_S10467Nr27.1.csv, results/mirdeep2/survey_miRNA_S10467Nr27.1.csv, results/mirdeep2/output_miRNA_S10467Nr27.1.mrd, results/mirdeep2/expression_miRNA_S10467Nr27.1.html, results/mirdeep2/error_miRNA_S10467Nr27.1.log, results/mirdeep2/miRNAs_expressed_all_samples_miRNA_S10467Nr27.1.csv, results/mirdeep2/result_miRNA_S10467Nr27.1.bed
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2025-04-12T132124.192290.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -11,3 +11,4 @@ statsmodels==0.14.0
 python-dateutil==2.8.2
 pytz==2023.3.post1
 lightgbm==4.3.0
+matplotlib-venn==1.1.2

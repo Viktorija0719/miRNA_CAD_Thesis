@@ -1,0 +1,32 @@
+samples:
+  - miRNA_S7504Nr13.1
+#  - miRNA_S10467Nr27.1
+#  - miRNA_S8141Nr21.1
+#  - miRNA_S8141Nr43.1
+#  - miRNA_S8141Nr64.1
+#  - miRNA_S8141Nr86.1
+#  - miRNA_S8141Nr108.1
+#  - miRNA_S8141Nr51.1
+#  - miRNA_S8141Nr52.1
+#  - miRNA_S8141Nr53.1
+#  - miRNA_S8141Nr54.1
+#  - miRNA_S8141Nr55.1
+#  - miRNA_S8141Nr37.1
+#  - miRNA_S8141Nr38.1
+#  - miRNA_S8141Nr39.1
+#  - miRNA_S8141Nr40.1
+#  - miRNA_S8141Nr41.1
+
+directories:
+  raw_data: "../data/raw"  # Relative path from miRNA_analysis
+  fastqc_output: "results/fastqc"
+  multiqc_output: "results/multiqc"
+  mirdeep2_ref: "ref/mirdeep2"
+  mirdeep2_map: "results/mirdeep2"
+  hsa_ref: "../data/ref"  # Relative path to data
+  mirdeep2_final: "results/mirdeep2"  # Same as map for now
+
+files:
+  ref_file: "../data/ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa"  # Relative path
+  hairpin: "hairpin.fa"
+  mature: "mature.fa"

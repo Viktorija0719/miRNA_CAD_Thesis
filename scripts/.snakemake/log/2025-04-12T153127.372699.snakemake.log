@@ -1,0 +1,5 @@
+Building DAG of jobs...
+MissingInputException in rule all in file /mnt/beegfs2/home/vikja01/miRNA_CAD_Thesis/miRNA_analysis/Snakefile03, line 6:
+Missing input files for rule all:
+    affected files:
+        results/mirdeep2/.mirdeep2_outputs_organized.done
