@@ -288,8 +288,10 @@ def impute_with_em(df, columns, exclude=None):
 
 
 
+
 def impute_with_hotdeck(df, columns, exclude=None):
     df_copy = df.copy()
+    
     if exclude:
         columns = [col for col in columns if col not in exclude]
 
@@ -302,6 +304,11 @@ def impute_with_hotdeck(df, columns, exclude=None):
         null_mask = row.isnull()
         row_clean = row.loc[~null_mask].values.reshape(1, -1)
         donor_matrix = rows_without_nan.loc[:, ~null_mask].values
+
+        if donor_matrix.size == 0:
+            # No donors available, skip this row safely
+            continue
+
         distances = scipy.spatial.distance.cdist(row_clean, donor_matrix, 'euclidean')
         donor_idx = np.argmin(distances)
 
@@ -312,6 +319,7 @@ def impute_with_hotdeck(df, columns, exclude=None):
 
     df_copy.update(rows_with_nan)
     return df_copy
+
 
 
 # ------------------------- Evaluation ------------------------- #

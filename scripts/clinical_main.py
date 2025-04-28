@@ -64,47 +64,17 @@ METHOD_MAPPING = {
 }
 
 # -------------------------- Main Functions --------------------------- #
-def load_and_preprocess_data(path1, path2):
-    data1, _ = pyreadstat.read_sav(path1)
-    data2, _ = pyreadstat.read_sav(path2)
-    
-    cat1 = [c for c in CATEGORICAL_COLS if c in data1.columns]
-    cat2 = [c for c in CATEGORICAL_COLS if c in data2.columns]
-    num1 = [c for c in NUMERICAL_COLS if c in data1.columns]
-    num2 = [c for c in NUMERICAL_COLS if c in data2.columns]
+def load_data(path):
+    """Load one cleaned CSV file."""
+    df = pd.read_csv(path, index_col=False)
 
-    data1_filtered = data1[cat1 + num1].copy()
-    data2_filtered = data2[cat2 + num2].copy()
-    data2_filtered['Group'] = 0
-
-    for df, cats in zip([data1_filtered, data2_filtered], [cat1, cat2]):
-        for col in cats:
+    for col in CATEGORICAL_COLS:
+        if col in df.columns:
             df[col] = df[col].astype('category')
 
-    data1_filtered['Positive_family_history'].replace(['', 'unknown', 'missing', 'NA'], pd.NA, inplace=True)
-    return data1_filtered, data2_filtered
+    for col in df.select_dtypes(include='category').columns:
+        df[col] = df[col].cat.remove_unused_categories()
 
-def clean_and_merge(data1, data2):
-    data1 = data1.dropna(subset=['Group'])
-    data2 = data2.dropna(subset=['Group'])
-    
-    data1 = data1[~data1['miRNA'].isin(['KG46', 'KG33', 'KP059'])]
-    data2 = data2[~data2['miRNA'].isin(['11K3', '11K1', '9K1', '27K1', '30K1', '31K3', '31K5', '1K3', '2K3', ''])]
-    
-    if (dup := data2[data2['miRNA'] == '12K1']).shape[0] > 1:
-        drop_idx = dup.isnull().sum(axis=1).idxmax()
-        data2 = data2.drop(index=drop_idx)
-
-    data2['miRNA'].replace({'20K3': '10.10.Plume', '8K1': '26K1'}, inplace=True)
-    return pd.concat([data1, data2], ignore_index=True)
-
-def fix_known_issues(df):
-    corrections = {
-        (97, 11): 5.2, (117, 11): 3.1, (115, 16): 1.46, (91, 26): np.nan,
-        (72, 30): 10.17, (129, 9): 35.7, (136, 12): 155, (101, 6): 0.0
-    }
-    for (row, col), val in corrections.items():
-        df.iat[row, col] = val
     return df
 
 def summarize_and_analyze(df):
@@ -166,11 +136,11 @@ def final_transform(df, best_imputer_fn, norm_method):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--path1', type=str, required=True)
-    parser.add_argument('--path2', type=str, required=True)
-    parser.add_argument('--output_dir', type=str, default='./reports')
-    parser.add_argument('--data_save_path', type=str, default='./data/processed')
+    parser.add_argument('--input_csv', type=str, required=True, help="Path to the input .csv file")
+    parser.add_argument('--output_dir', type=str, default='./reports', help="Directory to save output files")
+    parser.add_argument('--data_save_path', type=str, default='./data/processed', help="Directory to save processed datasets")
     return parser.parse_args()
+
 
 def main():
     args = parse_args()
@@ -178,28 +148,25 @@ def main():
     figures_path = os.path.join(args.output_dir, 'figures')
     os.makedirs(figures_path, exist_ok=True)
 
-    df1, df2 = load_and_preprocess_data(args.path1, args.path2)
-    df_combined = clean_and_merge(df1, df2)
-    df_combined = fix_known_issues(df_combined)
-
-    for col in CATEGORICAL_COLS:
-        if col in df_combined.columns:
-            df_combined[col] = df_combined[col].astype('category')
-
-    for col in df_combined.select_dtypes(include='category').columns:
-        df_combined[col] = df_combined[col].cat.remove_unused_categories()
-
-    # Save cleaned df_combined
-    os.makedirs(args.data_save_path, exist_ok=True)
-    df_combined.to_csv(os.path.join(args.data_save_path, 'df_combined_cleaned.csv'), index=False)
-
     # Save original summaries
     tables_path = os.path.join(args.output_dir, 'tables')
     os.makedirs(tables_path, exist_ok=True)
+    
+
+    os.makedirs(args.data_save_path, exist_ok=True)
+
+    # Load the single CSV file
+    df_combined = load_data(args.input_csv)
+
+    # Summarize and analyze
+    summarize_and_analyze(df_combined)
+
+    # Save the cleaned dataframe
+    df_combined.to_csv(os.path.join(args.data_save_path, 'df_combined_cleaned.csv'), index=False)
+
+    # Save original summaries
     summarize_categorical_stats(df_combined).to_csv(os.path.join(tables_path, 'categorical_summary_before_imputation.csv'))
     summarize_numerical_stats(df_combined).to_csv(os.path.join(tables_path, 'numerical_summary_before_imputation.csv'))
-
-    summarize_and_analyze(df_combined)
 
     print("\n🚧 Running Imputation Comparison...\n")
     mae_df, rmse_df, all_methods = run_imputation_workflow(df_combined)

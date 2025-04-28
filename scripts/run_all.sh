@@ -18,14 +18,14 @@
   # ================
   # Step 1: Preprocess miRNA counts
   # ================
-  python3 ./scripts/mergeMiRPrecursors.py \
-    ./data/processed/ \
-    ./data/metadata/CeGaT_id_External_id_9.csv \
-    ./data/processed/countTable.txt
+#  python3 ./scripts/mergeMiRPrecursors.py \
+#    ./data/processed/ \
+#    ./data/metadata/CeGaT_id_External_id_9.csv \
+#    ./data/processed/countTable.txt
   
-  Rscript ./scripts/table_to_matrix.R \
-    ./data/processed/countTable.txt \
-    ./data/processed/countData.txt
+#  Rscript ./scripts/table_to_matrix.R \
+#    ./data/processed/countTable.txt \
+#    ./data/processed/countData.txt
   
   python3 ./scripts/filter_out_low_counts.py \
     ./data/processed/countData.txt \
