@@ -60,19 +60,6 @@ def main():
                 if len(set(values)) < low_variability_threshold:
                     continue
 
-                
-                # List of miRNAs to exclude
-                exclude_miRNAs = {
-                    "hsa-miR-1299", "hsa-miR-20a-3p", "hsa-miR-3157-5p",
-                    "hsa-miR-34a-5p", "hsa-miR-4516", "hsa-miR-548ax",
-                    "hsa-miR-610", "hsa-miR-6818-5p"
-                }
-
-                # Skip if the miRNA is in the exclusion list
-                if geneId in exclude_miRNAs:
-                    continue
-
-
 
                 group_medians = []
                 for prefix, indices in group_indices.items():

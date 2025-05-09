@@ -55,6 +55,19 @@ install.packages("randomForest")
 ./scripts/run_all.sh
 ```
 
-- Refer to the `reports/` directory for the full thesis document and supplementary materials.
+## Synthetic Data Generation
+
+As part of this project, synthetic datasets were generated to supplement the original miRNA expression data. The following files contain synthetic data:
+
+- `synthetic_clinical_data.csv`
+- `countData.txt`
+
+These datasets were created using the [CTGANSynthesizer](https://docs.sdv.dev/sdv/single-table-data/modeling/synthesizers/ctgansynthesizer) from the [Synthetic Data Vault (SDV)](https://docs.sdv.dev/sdv) library.
+
+**Reference:**
+Xu, L., Skoularidou, M., Cuesta-Infante, A., & Veeramachaneni, K. (2019). Modeling Tabular data using Conditional GAN. *Advances in Neural Information Processing Systems*, 32. [Link](https://papers.nips.cc/paper/2019/hash/254ed7d2de3b23ab10936528e9c54a9f-Abstract.html)
+
+The synthetic data were generated to enhance the dataset for analysis while ensuring data privacy and compliance with ethical standards.
+
 
 

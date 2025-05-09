@@ -13,7 +13,9 @@
 #   <input_dir>          Directory containing files named like 'miRNAs_expressed_all_samples_*.csv'
 #   <sample_id_file.csv> CSV file mapping internal sample IDs (CeGaT) to clinical sample IDs
 #   <output_file>        Path to the output file (e.g., ./countTable_11.txt)
-
+# NOTE:
+#   This script was adapted and modified from original code developed by 
+#   Dr. rer. nat. Baiba Vilne.
 
 
 import os, sys, glob, statistics
